@@ -4,6 +4,8 @@
 #include <iostream>
 #include <windows.h>
 #include <iomanip>
+#include <time.h> 
+#include <stdlib.h> 
 using namespace std;
 
 HANDLE console = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -21,7 +23,13 @@ void ChangeTextColour(int iCoulorValue)
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), iCoulorValue);
 }
 
-
+void ColorRand()
+{
+    int random;
+    srand(time(0));
+    random = rand() % 16 + 1;
+    SetConsoleTextAttribute(console, random);
+}
 const char* d0[11][10] = {  "0","0","0","0","0","0","0","0","0","0",
                             "0"," "," "," "," "," "," "," "," ","0",
                             "0"," "," "," "," "," "," "," "," ","0",
@@ -144,52 +152,31 @@ const char* sep[11][10] = {    " "," "," "," "," "," "," "," "," "," ",
                                " "," "," "," "," "," "," "," "," "," ",
                                " "," "," "," "," "," "," "," "," "," ", };
 
-void timer(int hours, int minutes, int seconds)
-{
-    while (seconds != 0 || minutes != 0 || hours != 0)
-    {
-        if (hours == 0 && minutes == 0 && seconds == 0)
-        {
-            break;
-        }
-        if (seconds == 0 && minutes == 0)
-        {
-            hours--;
-            minutes = 60;
-        }
-        if (seconds == 0)
-        {
-            minutes--;
-            seconds = 60;
-        }
-        system("cls");
-        cout << hours << ":" << minutes << ":" << seconds--;
-        Sleep(1000);
-    }
-}
+
+
 void printDigit(int no, int x, int y)
 {
     for (int i = 0; i < 11; i++) {
         for (int j = 0; j < 10; j++) {
             switch (no) {
-            case 0: gotoxy(x + j, y + i); ChangeTextColour(11); cout << d0[i][j]; break;
-            case 1: gotoxy(x + j, y + i); ChangeTextColour(1); cout << d1[i][j]; break;
-            case 2: gotoxy(x + j, y + i); ChangeTextColour(2); cout << d2[i][j]; break;
-            case 3: gotoxy(x + j, y + i); ChangeTextColour(3); cout << d3[i][j]; break;
-            case 4: gotoxy(x + j, y + i); ChangeTextColour(4); cout << d4[i][j]; break;
-            case 5: gotoxy(x + j, y + i); ChangeTextColour(5); cout << d5[i][j]; break;
-            case 6: gotoxy(x + j, y + i); ChangeTextColour(6); cout << d6[i][j]; break;
-            case 7: gotoxy(x + j, y + i); ChangeTextColour(7); cout << d7[i][j]; break;
-            case 8: gotoxy(x + j, y + i); ChangeTextColour(8); cout << d8[i][j]; break;
-            case 9: gotoxy(x + j, y + i); ChangeTextColour(9); cout << d9[i][j]; break;
-            case 10: gotoxy(x + j, y + i); ChangeTextColour(10); cout << sep[i][j]; break;
+            case 0: gotoxy(x + j, y + i); cout << d0[i][j]; break;
+            case 1: gotoxy(x + j, y + i); cout << d1[i][j]; break;
+            case 2: gotoxy(x + j, y + i); cout << d2[i][j]; break;
+            case 3: gotoxy(x + j, y + i); cout << d3[i][j]; break;
+            case 4: gotoxy(x + j, y + i); cout << d4[i][j]; break;
+            case 5: gotoxy(x + j, y + i); cout << d5[i][j]; break;
+            case 6: gotoxy(x + j, y + i); cout << d6[i][j]; break;
+            case 7: gotoxy(x + j, y + i); cout << d7[i][j]; break;
+            case 8: gotoxy(x + j, y + i); cout << d8[i][j]; break;
+            case 9: gotoxy(x + j, y + i); cout << d9[i][j]; break;
+            case 10: gotoxy(x + j, y + i); cout << sep[i][j]; break;
             }
         }
     }
 }
 void printTitle()
 {
-    ChangeTextColour(4);
+    ColorRand();
     cout << "     _    ____   ____ ___ ___   _____ _" << endl;
     cout << "    / \\  / ___| / ___|_ _|_ _| |_   _(_)_ __ ___   ___ _ __" << endl;
     cout << "   / _ \\ \\___ \\| |    | | | |    | | | | '_ ` _ \\ / _ \\ '__|" << endl;
